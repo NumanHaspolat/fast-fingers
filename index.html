@@ -38,6 +38,8 @@
       </main>
     </div>
 
+    <div class="top-scores"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.22/dist/vanta.halo.min.js"></script>
     <script>
@@ -61,12 +63,12 @@
       import gsap from "https://cdn.skypack.dev/gsap";
 
       let tl = gsap.timeline({
-        defaults: { ease: "power4.inOut", duration: 3 },
+        defaults: { ease: "power4.inOut", duration: 2 },
       });
 
-      tl.set(".me", { opacity: 0, y: 40 });
+      tl.set(".me, .top-scores", { opacity: 0, y: 40 });
 
-      tl.to(".me", {
+      tl.to(".me, .top-scores", {
         opacity: 1,
         y: 0,
         stagger: 0,

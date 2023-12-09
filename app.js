@@ -14,41 +14,41 @@ let shuffledTexts;
 let timerInterval;
 
 startBtn.addEventListener("click", startGame);
-  function startGame() {
-    // wordCount.classList.add("none");
-    startBtn.classList.add("none");
-    textElement.classList.remove("none");
+function startGame() {
+  // wordCount.classList.add("none");
+  startBtn.classList.add("none");
+  textElement.classList.remove("none");
 
-    // Reset values
-    wordsIndex = 0;
-    totalWordsTyped = 0;
+  // Reset values
+  wordsIndex = 0;
+  totalWordsTyped = 0;
 
-    // Shuffle the texts array
-    shuffledTexts = shuffleArray([...texts]);
+  // Shuffle the texts array
+  shuffledTexts = shuffleArray([...texts]);
 
-    // Start the timer
-    startTime = new Date().getTime();
-    timerSec = 60;
-    updateTimer(); // Update the initial timer value
-    timerInterval = setInterval(() => {
-      if (timerSec <= 0) {
-        clearInterval(timerInterval);
-        time.innerText = "Time's up!";
-        showResult();
-      } else {
-        updateTimer();
-        timerSec--;
-      }
-    }, 1000);
+  // Start the timer
+  startTime = new Date().getTime();
+  timerSec = 60;
+  updateTimer(); // Update the initial timer value
+  timerInterval = setInterval(() => {
+    if (timerSec <= 0) {
+      clearInterval(timerInterval);
+      time.innerText = "Time's up!";
+      showResult();
+    } else {
+      updateTimer();
+      timerSec--;
+    }
+  }, 1000);
 
-    // Display the initial text
-    updateTextColors();
+  // Display the initial text
+  updateTextColors();
 
-    // Listen for user input
-    userInp.value = ""; // Clear the input field
-    userInp.removeEventListener("input", checkInput); // Remove the previous event listener
-    userInp.addEventListener("input", checkInput); // Add a new event listener
-  }
+  // Listen for user input
+  userInp.value = ""; // Clear the input field
+  userInp.removeEventListener("input", checkInput); // Remove the previous event listener
+  userInp.addEventListener("input", checkInput); // Add a new event listener
+}
 // document.getElementById("logo").addEventListener("click", function () {
 //   window.location.href = "index.html";
 // });
@@ -162,3 +162,29 @@ function showResult() {
   // Güncellenmiş en iyi skorları localStorage'da sakla
   localStorage.setItem("topScores", JSON.stringify(top5Scores));
 }
+
+const topScorePrinter = (scores) => {
+  const topScoresContainer = document.querySelector(".top-scores");
+  topScoresContainer.innerHTML = "";
+
+  const topScoresTitle = document.createElement("h2");
+  topScoresTitle.textContent = "Top Scores";
+  topScoresContainer.appendChild(topScoresTitle);
+
+  const topScoresList = document.createElement("ul");
+  topScoresList.classList.add("top-scores-list");
+
+  scores.forEach((score, index) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${index + 1}. ${score} WPM`;
+    topScoresList.appendChild(listItem);
+  });
+
+  topScoresContainer.appendChild(topScoresList);
+};
+
+// Call the function to display top scores when the page loads
+window.addEventListener("load", () => {
+  const storedTopScores = JSON.parse(localStorage.getItem("topScores")) || [];
+  topScorePrinter(storedTopScores);
+});
