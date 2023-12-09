@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="https://static-00.iconduck.com/assets.00/speed-icon-2048x2048-3jxhtv1e.png"
+      type="image/x-icon"
+    />
+    <title>IS THIS ENOUGH?</title>
+    <style>
+      #vanta-container {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="vanta-container">
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/in/numan-haspolat/"
+        class="me"
+        >Coded by Numan</a
+      >
+      <main>
+        <div class="cnt">
+          <p class="texts none"></p>
+          <input type="text" id="user-inp" />
+          <button class="start">Start Test</button>
+          <p class="time"></p>
+          <span class="word-count"
+            >Your typing speed (WPM) will be displayed here</span
+          >
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.22/dist/vanta.halo.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        VANTA.HALO({
+          el: "#vanta-container",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          baseColor: 0xcdff,
+          backgroundColor: 0x163f46,
+        });
+      });
+    </script>
+    <script type="module" src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/CSSRulePlugin.min.js"></script>
+    <script type="module">
+      import gsap from "https://cdn.skypack.dev/gsap";
+
+      let tl = gsap.timeline({
+        defaults: { ease: "power4.inOut", duration: 3 },
+      });
+
+      tl.set(".me", { opacity: 0, y: 40 });
+
+      tl.to(".me", {
+        opacity: 1,
+        y: 0,
+        stagger: 0,
+        ease: "power3.out",
+      });
+
+      let dl = gsap.timeline({
+        defaults: { ease: "power2.inOut", duration: 1 },
+      });
+
+      dl.set(".cnt, p input", { opacity: 0, y: 50 });
+
+      dl.to(".cnt, p input", {
+        opacity: 1,
+        y: 0,
+        stagger: 0,
+        ease: "power5.out",
+      });
+
+      tl.play();
+    </script>
+  </body>
+</html>
